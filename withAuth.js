@@ -4,7 +4,7 @@ const secret = "mesocyclone";
 const withAuth = (req, res, next) => {
 	//on récupère notre token dans le header de la requète HTTP (toujours crypté)
 	const token = req.headers["x-access-token"];
-	if(token === undefined || token.includes('null')) {
+	if(token === undefined || token.includes('null') || token === null ) {
 		res.json({
 			status: 404,
 			msg: "token not found",

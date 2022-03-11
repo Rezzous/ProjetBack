@@ -9,7 +9,7 @@ module.exports = (_db) => {
 class UserModel {
 	static getUserByMail(email) {
 		return db
-			.query("SELECT firstName, lastName, email, password FROM users WHERE email = ?", [email])
+			.query("SELECT id, firstName, lastName, email, password FROM users WHERE email = ?", [email])
 			.then((res) => {
 				return res;
 			})

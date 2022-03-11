@@ -20,13 +20,12 @@ module.exports = (app, db) => {
 		});
 	});
 
-    app.patch("/api/v1/coaches/update/:id", async (req, res) => {
-		let id = req.params.id;
-		await coachModel.updateOneCoach(id).then((res1) => {
+	app.put("/api/v1/coaches/add", async (req, res) => {
+		await coachModel.addOneCoach(req).then((res1) => {
 			if (res1.code) {
 				res.json({ status: 500, error: res1.message });
 			}
-			res.json({ status: 200, msg: "Données du coach bien modifiées" });
+			res.json({ status: 200, msg: "Coach bien ajouté !" });
 		});
 	});
 
@@ -36,7 +35,16 @@ module.exports = (app, db) => {
 			if (res1.code) {
 				res.json({ status: 500, error: res1.message });
 			}
-			res.json({ status: 200, msg: "Coach bien supprimée" });
+			res.json({ status: 200, msg: "Coach bien supprimé" });
+		});
+	});
+
+	app.patch("/api/v1/coaches/update/:id", async (req, res) => {
+		await coachModel.updateOneCoach(req).then((res1) => {
+			if (res1.code) {
+				res.json({ status: 500, error: res1.message });
+			}
+			res.json({ status: 200, msg: "Données du coach bien modifiées" });
 		});
 	});
 }
